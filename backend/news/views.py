@@ -16,6 +16,11 @@ class ArticleDetailView(ListAPIView):
         queryset = Article.objects.filter(slug__iexact=slug)
         return queryset.order_by('-date_created')
 
+class FeaturedArticleView(ListAPIView):
+    queryset = Article.objects.filter(featured=True)
+    serializer_class = ArticleSerializer
+    lookup_field = 'slug'
+
 class ArticleCategoryView(ListAPIView):
     serializer_class = ArticleSerializer
     lookup_field = 'slug'

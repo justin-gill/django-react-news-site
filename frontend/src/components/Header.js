@@ -7,11 +7,11 @@ import logo from '../assets/images/logo.svg'
 
 function Header() {
     return (
-        <Navbar collapseOnSelect expand="lg" sticky="top" className='nav' variant='dark' bg='dark'>
+        <Navbar collapseOnSelect expand="lg" className='nav' variant='dark' bg='dark'>
             <Container>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                <Navbar.Brand className="m-auto" as={Link} to="/">
+                <Navbar.Brand as={Link} to="/">
                     <img
                         src={logo}
                         width="35"
