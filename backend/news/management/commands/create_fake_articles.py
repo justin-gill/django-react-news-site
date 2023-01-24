@@ -16,5 +16,7 @@ class Command(BaseCommand):
         for i in range(num_articles):
             Article.objects.create(title=gen.sentence(),
                 category=Article.Category.names[i % len(Article.Category.names)],
-                thumbnail=UploadedFile(file=open("static/temp.jpg", 'rb')))
+                thumbnail=UploadedFile(file=open("static/temp.jpg", 'rb')),
+                # thumbnail=UploadedFile(file=open("backend/static/temp.jpg", 'rb')),
+                featured=True)
         print(f"[create_fake_articles] Finished creating {num_articles} Articles")

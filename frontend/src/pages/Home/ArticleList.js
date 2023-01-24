@@ -1,32 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Box,
   Heading,
   Image,
   Text,
   Divider,
+  HStack,
   Wrap,
   WrapItem,
   Container,
 } from '@chakra-ui/react';
 
-const CategoryArticleGrid = () => {
+export const BlogAuthor = (props) => {
+  return (
+    <HStack marginTop="2" spacing="2" display="flex" alignItems="center">
+      <Image
+        borderRadius="full"
+        boxSize="40px"
+        src="https://100k-faces.glitch.me/random-image"
+        alt={`Avatar of ${props.name}`}
+      />
+      <Text fontWeight="medium">{props.name}</Text>
+      <Text>—</Text>
+      <Text>{props.date.toLocaleDateString()}</Text>
+    </HStack>
+  );
+};
+
+
+const ArticleList = () => {
   const [articles, setArticles] = useState([])
 
-  let { id } = useParams()
 
   useEffect(() => {
     const dataFetch = async () => {
       const data = await (
         await fetch(
-          `${process.env.REACT_APP_API_URL}/api/news/category/${id}`,
+          `${process.env.REACT_APP_API_URL}/api/news/all`,
         )
       ).json()
       setArticles(data)
     };
     dataFetch()
-  }, [id])
+  }, [])
 
   const getArticles = () => {
     let list = []
@@ -59,7 +76,10 @@ const CategoryArticleGrid = () => {
             <Text as="p" fontSize="md" marginTop="2">
               {articlePost.excerpt}
             </Text>
-
+            <BlogAuthor
+              name="John Doe"
+              date={new Date('2021-04-06T19:01:27Z')}
+            />
           </Box>
         </WrapItem>
       );
@@ -85,4 +105,4 @@ const CategoryArticleGrid = () => {
   );
 };
 
-export default CategoryArticleGrid;
+export default ArticleList;

@@ -1,18 +1,12 @@
-import ArticleGrid from './ArticleGrid';
-import FeaturedArticle from './FeaturedArticle';
-import Subheader from '../../components/Subheader';
-import Row from 'react-bootstrap/Row';
+// import ArticleGrid from './ArticleGrid';
+import Hero from "./Hero";
+import ArticleList from "./ArticleList";
 
 const Home = () => {
   return (
-    <div className='container'>
-      <Row>
-        <Subheader />
-      </Row>
-      <Row>
-        <FeaturedArticle />
-      </Row>
-      <ArticleGrid />
+    <div>
+      <Hero />
+      <ArticleList />
     </div>
   );
 };
