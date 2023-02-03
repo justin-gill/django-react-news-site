@@ -1,10 +1,13 @@
+import { Container } from '@chakra-ui/react';
+import CategoryHeader from './CategoryHeader';
 import CategoryArticleGrid from './CategoryArticleGrid';
 
 const Home = () => {
   return (
-    <div>
+    <Container maxW={['100%', '100%', '70%', '70%']}>
+      <CategoryHeader />
       <CategoryArticleGrid />
-    </div>
+    </Container>
   );
 };
 

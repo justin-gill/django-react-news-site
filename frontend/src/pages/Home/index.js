@@ -1,13 +1,13 @@
-// import ArticleGrid from './ArticleGrid';
+import { Container } from '@chakra-ui/react';
 import Hero from "./Hero";
 import ArticleList from "./ArticleList";
 
 const Home = () => {
   return (
-    <div>
+    <Container maxW={['100%', '100%', '70%', '70%']}>
       <Hero />
       <ArticleList />
-    </div>
+    </Container>
   );
 };
 

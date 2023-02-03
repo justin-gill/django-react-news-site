@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import {
   Flex,
-  Heading,
-  Image,
+  VStack,
   Stack,
+  Button,
   Text,
-  Container
+  useBreakpointValue
 } from '@chakra-ui/react';
 
 
@@ -25,33 +25,43 @@ export default function Hero() {
     dataFetch()
   }, [])
 
-
   return (
-    <Container maxW={['100%', '100%', '70%', '70%']}>
-      <Link to={`/article/${featuredArticleObject.slug}`}>
-        <Stack minH={'20vh'} direction={{ base: 'column', md: 'row' }}>
-          <Flex flex={1}>
-            <Image
-              objectFit={'contain'}
-              src={featuredArticleObject.thumbnail}
-            />
-          </Flex>
-          <Flex p={8} flex={1} align={'center'} justify={'center'}>
-            <Stack spacing={6} w={'full'} maxW={'lg'}>
-              <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
-                <Text
-                  as={'span'}
-                  position={'relative'}>
-                  {featuredArticleObject.title}
-                </Text>
-              </Heading>
-              <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-                {featuredArticleObject.excerpt}
-              </Text>
-            </Stack>
-          </Flex>
+    <Flex
+      boxShadow='dark-lg'
+      w={'full'}
+      h={'35vh'}
+      backgroundImage={featuredArticleObject['thumbnail']}
+      bgImage={"linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)) , url('" + featuredArticleObject['thumbnail'] + "')"}
+      backgroundSize={'cover'}
+      backgroundPosition={'center center'}>
+      <VStack
+        w={'full'}
+        justify={'center'}
+        px={useBreakpointValue({ base: 4, md: 8 })}
+        bgGradient={'linear(to-r, blackAlpha.600, transparent)'}>
+        <Stack maxW={'2xl'} align={'flex-start'} spacing={6} overflow={"hidden"}>
+          <Link to={`/article/${featuredArticleObject.slug}`}>
+            <Text
+              textOverflow={"ellipsis"}
+              color={'white'}
+              lineHeight={1.4}
+              fontSize={['sm', 'xl', '2xl', '3xl']}>
+              {featuredArticleObject.title}
+            </Text>
+          </Link>
+          <Stack direction={'row'}>
+            <Link to={`/article/${featuredArticleObject.slug}`}>
+              <Button
+                bg={'primary.500'}
+                rounded={'full'}
+                color={'white'}
+                _hover={{ bg: 'black' }}>
+                Go to Article
+              </Button>
+            </Link>
+          </Stack>
         </Stack>
-      </Link>
-    </Container>
+      </VStack>
+    </Flex>
   );
 }

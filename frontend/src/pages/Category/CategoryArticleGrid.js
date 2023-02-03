@@ -6,10 +6,19 @@ import {
   Image,
   Text,
   Divider,
-  Wrap,
-  WrapItem,
+  Grid,
+  GridItem,
   Container,
+  HStack,
 } from '@chakra-ui/react';
+
+export const BlogAuthor = (props) => {
+  return (
+    <HStack marginTop="2" spacing="2" display="flex" alignItems="center">
+      <Text>{props.date.toLocaleDateString()}</Text>
+    </HStack>
+  );
+};
 
 const CategoryArticleGrid = () => {
   const [articles, setArticles] = useState([])
@@ -34,16 +43,18 @@ const CategoryArticleGrid = () => {
 
     articles.map(articlePost => {
       return list.push(
-        <WrapItem width={{ base: '100%', sm: '45%', md: '45%', lg: '30%' }}>
+        <GridItem w={"100%"}>
           <Box w="100%">
             <Box borderRadius="lg" overflow="hidden">
               <Link textDecoration="none" to={`/article/${articlePost.slug}`} _hover={{ textDecoration: 'none' }}>
                 <Image
+                  w={'full'}
+                  h={'30vh'}
+                  backgroundSize={'cover'}
                   transform="scale(1.0)"
                   src={articlePost.thumbnail}
                   alt="some text"
-                  objectFit="contain"
-                  width="100%"
+                  objectFit="cover"
                   transition="0.3s ease-in-out"
                   _hover={{
                     transform: 'scale(1.05)',
@@ -59,9 +70,12 @@ const CategoryArticleGrid = () => {
             <Text as="p" fontSize="md" marginTop="2">
               {articlePost.excerpt}
             </Text>
-
+            <BlogAuthor
+              name="John Doe"
+              date={new Date('2021-04-06T19:01:27Z')}
+            />
           </Box>
-        </WrapItem>
+        </GridItem>
       );
     })
 
@@ -76,11 +90,11 @@ const CategoryArticleGrid = () => {
     return list
   }
   return (
-    <Container maxW={'7xl'} p="12">
+    <Container maxW={'7xl'} p="4">
       <Divider marginTop="5" />
-      <Wrap spacing="30px" marginTop="5">
+      <Grid templateColumns='repeat(3, 1fr)' gap={6} mt="2vh">
         {getArticles()}
-      </Wrap>
+      </Grid>
     </Container>
   );
 };

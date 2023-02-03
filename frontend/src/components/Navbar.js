@@ -52,7 +52,6 @@ const MenuLinks = ({ isOpen }) => {
         direction={["column", "column", "row", "row"]}
         pt={[4, 4, 0, 0]}
         textDecoration="none"
-
       >
         <ChakraLink as={Link} _hover={{ textDecoration: "none" }} to="/category/world">World</ChakraLink>
         <ChakraLink as={Link} _hover={{ textDecoration: "none" }} to="/category/technology">Technology</ChakraLink>

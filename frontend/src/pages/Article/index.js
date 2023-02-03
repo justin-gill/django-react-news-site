@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom'
-import { Text, VStack, Container, Image } from "@chakra-ui/react";
+import { Text, VStack, Button, Container, Image, Box } from "@chakra-ui/react";
 
 const ArticleDetail = () => {
 
@@ -31,21 +31,35 @@ const ArticleDetail = () => {
   }
 
   return (
-    <Container maxW={'7xl'} p="12">
+    <Container maxW={'7xl'} p="1em 1em 5em 1em">
       <VStack>
-        <Text fontSize='6xl'>
-          {article.title}
-        </Text>
         <Image
-          objectFit={'contain'}
+          w={'full'}
+          h={'50vh'}
+          backgroundSize={'cover'}
+          objectFit="cover"
           src={article.thumbnail}
         />
-        <Text fontSize='1xl'>
-          Category: {capitalizeFirstLetter(article.category)} {article.month} {article.day}
-        </Text>
-        <div dangerouslySetInnerHTML={createArticle()} />;
+        <Box w={['100%', '100%', '70%', '70%']}>
+          <Text fontSize='1xl'>
+            Category: {capitalizeFirstLetter(article.category)} {article.month} {article.day}
+          </Text>
+          <Text fontSize={['xl', 'xl', '2xl', '3xl']}>
+            {article.title}
+          </Text>
+        </Box>
+        <Box w={['100%', '100%', '60%', '60%']} pb={"2em"}>
+          <div dangerouslySetInnerHTML={createArticle()} />
+        </Box >
+        
         <Link to="/">
-          Back to Articles
+          <Button
+            bg={'primary.500'}
+            rounded={'full'}
+            color={'white'}
+            _hover={{ bg: 'black' }}>
+            Back to Articles
+          </Button>
         </Link>
       </VStack>
     </Container>
