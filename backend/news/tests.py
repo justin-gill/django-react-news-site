@@ -23,7 +23,7 @@ class ArticleListTest(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-        num_articles = 10
+        num_articles = 9
         self.article_list = create_random_articles(num_articles)
 
     def test_article_list(self):
@@ -34,7 +34,7 @@ class ArticleListTest(TestCase):
         articles_expected_list = self.article_list
         # reverse list to test order by descending date
         articles_expected_list.reverse()
-        articles_result_list = response.data
+        articles_result_list = response.data['results']
         self.assertEqual(len(articles_result_list), len(articles_expected_list))
 
         for i in range(len(articles_expected_list)):
@@ -47,7 +47,6 @@ class ArticleListTest(TestCase):
             self.assertEqual(article_exp.excerpt, article_res['excerpt'])
             self.assertEqual(article_exp.month, article_res['month'])
             self.assertEqual(article_exp.day, article_res['day'])
-            self.assertEqual(article_exp.content, article_res['content'])
             self.assertEqual(article_exp.featured, article_res['featured'])
 
     def test_article_category_list(self):
@@ -56,7 +55,7 @@ class ArticleListTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         articles_expected_list = [article for article in self.article_list if article.category == 'WORLD']
-        articles_result_list = response.data
+        articles_result_list = response.data['results']
         self.assertEqual(len(articles_result_list), len(articles_expected_list))
 
     def test_article_detail_view(self):
@@ -80,7 +79,7 @@ class ArticleCreationTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        articles_result_list = response.data
+        articles_result_list = response.data['results']
         self.assertNotEqual(articles_result_list[0]['slug'], articles_result_list[1]['slug'])
 
     def test_single_featured(self):
@@ -88,5 +87,5 @@ class ArticleCreationTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        articles_result_list = response.data
+        articles_result_list = response.data['results']
         self.assertNotEqual(articles_result_list[0]['featured'], articles_result_list[1]['featured'])

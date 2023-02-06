@@ -10,6 +10,6 @@ class ArticleSerializer(serializers.ModelSerializer):
 class ArticleListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ['title', 'slug', 'category', 'thumbnail', 'excerpt', 'month', 'day', 'featured']
+        fields = ['title', 'slug', 'category', 'thumbnail', 'excerpt', 'month', 'day', 'featured', 'date_created']
         lookup_field = 'slug'
 
