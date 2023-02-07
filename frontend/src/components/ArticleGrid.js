@@ -68,7 +68,7 @@ const ArticleGrid = (props) => {
                   backgroundSize={'cover'}
                   transform="scale(1.0)"
                   src={articlePost.thumbnail}
-                  alt="some text"
+                  alt={articlePost.slug}
                   objectFit="cover"
                   transition="0.3s ease-in-out"
                   _hover={{
@@ -78,7 +78,7 @@ const ArticleGrid = (props) => {
               </Link>
             </Box>
             <Heading fontSize="xl" marginTop="2">
-              <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
+              <Link textDecoration="none" to={`/article/${articlePost.slug}`} _hover={{ textDecoration: 'none' }}>
                 {articlePost.title}
               </Link>
             </Heading>

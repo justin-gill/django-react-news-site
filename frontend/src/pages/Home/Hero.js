@@ -32,11 +32,12 @@ export default function Hero() {
       <Flex
         boxShadow='dark-lg'
         w={'full'}
-        h={'35vh'}
+        h={'45vh'}
         backgroundImage={featuredArticleObject['thumbnail']}
         bgImage={"linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)) , url('" + featuredArticleObject['thumbnail'] + "')"}
         backgroundSize={'cover'}
-        backgroundPosition={'center center'}>
+        // backgroundPosition={'center center'}
+      >
 
         <VStack
           w={'full'}
