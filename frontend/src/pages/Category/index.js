@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <Container maxW={['100%', '100%', '70%', '70%']}>
       <CategoryHeader />
-      <ArticleGrid apiUrl={apiUrl} category={id}/>
+      <ArticleGrid apiUrl={apiUrl} category={id} />
     </Container>
   );
 };

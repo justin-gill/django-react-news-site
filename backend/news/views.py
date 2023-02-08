@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView
+from rest_framework import pagination, status, response
 from news.models import Article
-from news.serializers import ArticleSerializer, ArticleListSerializer
-from rest_framework import pagination
+from news.serializers import ArticleSerializer, ArticleListSerializer, FeaturedArticleListSerializer
 
 class CustomPagination(pagination.PageNumberPagination):
     page_size = 9
@@ -24,7 +24,7 @@ class ArticleDetailView(ListAPIView):
 
 class FeaturedArticleView(ListAPIView):
     queryset = Article.objects.filter(featured=True)
-    serializer_class = ArticleListSerializer
+    serializer_class = FeaturedArticleListSerializer
     lookup_field = 'slug'
 
 class ArticleCategoryView(ListAPIView):
@@ -36,3 +36,13 @@ class ArticleCategoryView(ListAPIView):
         category = self.kwargs['category']
         queryset = Article.objects.filter(category__iexact=category)
         return queryset.order_by('-date_created')
+
+class CategoryChoicesView(ListAPIView):      
+    def get(self, request):         
+        choices = []         
+        choice_dict = dict(Article.Category.choices)  
+
+        for k, v in choice_dict.items():             
+            value = {'key': k, 'value': v}             
+            choices.append(value)         
+        return response.Response(choices, status=status.HTTP_200_OK)

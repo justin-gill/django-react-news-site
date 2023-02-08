@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
+from django.core.files.uploadedfile import UploadedFile
 from news.models import Article
 from essential_generators import DocumentGenerator
-from django.core.files.uploadedfile import UploadedFile
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
@@ -15,8 +15,7 @@ class Command(BaseCommand):
 
         for i in range(num_articles):
             Article.objects.create(title=gen.sentence(),
-                category=Article.Category.names[i % len(Article.Category.names)],
+                category=Article.Category.choices[i % len(Article.Category.choices)][0],
                 thumbnail=UploadedFile(file=open("static/temp.jpg", 'rb')),
-                # thumbnail=UploadedFile(file=open("backend/static/temp.jpg", 'rb')),
                 featured=True)
         print(f"[create_fake_articles] Finished creating {num_articles} Articles")

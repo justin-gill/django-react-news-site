@@ -9,7 +9,6 @@ import {
   Fade
 } from '@chakra-ui/react';
 
-
 export default function Hero() {
   const [isLoading, setLoading] = useState(true);
   const [featuredArticleObject, setFeaturedArticle] = useState([])
@@ -27,17 +26,24 @@ export default function Hero() {
     dataFetch()
   }, [])
 
+  // If there is no featured article, don't render hero banner
+  if (!featuredArticleObject) {
+    return (
+      <Text fontSize={"4xl"} pl={'8'}>
+        Home
+      </Text>
+    )
+  }
   return (
     <Fade in={!isLoading} transition={{ enter: { duration: .5 } }}>
       <Flex
         boxShadow='dark-lg'
         w={'full'}
         h={'45vh'}
-        backgroundImage={featuredArticleObject['thumbnail']}
-        bgImage={"linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)) , url('" + featuredArticleObject['thumbnail'] + "')"}
+        backgroundImage={featuredArticleObject.thumbnail}
+        bgImage={"linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)) , url('" + featuredArticleObject.thumbnail + "')"}
         backgroundSize={'cover'}
-        // backgroundPosition={'center center'}
-      >
+        backgroundPosition={featuredArticleObject.image_position}>
 
         <VStack
           w={'full'}

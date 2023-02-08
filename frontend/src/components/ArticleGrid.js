@@ -102,7 +102,7 @@ const ArticleGrid = (props) => {
       )
     }
 
-    return list
+    return result
   }
 
   const PageButtons = () => {

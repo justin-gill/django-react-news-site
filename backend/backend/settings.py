@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 
 import environ
-import os
 
 env = environ.Env()
 environ.Env.read_env()
@@ -31,11 +30,10 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
 # Application definition
 
 INSTALLED_APPS = [
+    'django_cleanup.apps.CleanupConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,12 +83,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': env('DB_ENGINE'),
         'NAME': env('DB_NAME_DJANGO'),
         'USER': env('DB_USER_DJANGO'),
         'PASSWORD': env('DB_PASSWORD_DJANGO'),
         'HOST': env('DB_HOST_DJANGO'),
-        'PORT': 5432,
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -134,7 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+DEFAULT_FILE_STORAGE = env('FILE_STORAGE_API')
 GS_BUCKET_NAME = env('GCP_BUCKET_NAME')
 STATIC_URL = '/django_static/'
 STATIC_ROOT = BASE_DIR / 'django_static'
@@ -167,9 +165,11 @@ CORS_ALLOW_HEADERS = [
     'content-type'
 ]
 
+ALLOWED_HOSTS = ['*']
+
 X_FRAME_OPTIONS = 'ALLOWALL'
 
-XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
+XS_SHARING_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 

@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <Container maxW={['100%', '100%', '70%', '70%']}>
       <Hero />
-      <ArticleGrid apiUrl={apiUrl}/>
+      <ArticleGrid apiUrl={apiUrl} />
     </Container>
   );
 };
