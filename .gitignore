@@ -5,6 +5,5 @@ __pycache__/
 media/
 images/
 *.jpg
-*.svg
 *service-account.json
 django_static
