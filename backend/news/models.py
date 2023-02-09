@@ -65,10 +65,14 @@ class Article(models.Model):
         # Auto generated content
         if self.generate_content:
             if len(self.content) == 0:
-                openai.api_key = settings.OPENAI_API_KEY
-                self.content = openai.Completion.create(model="text-davinci-003",
+                try:
+                    openai.api_key = settings.OPENAI_API_KEY
+                    self.content = openai.Completion.create(model="text-davinci-003",
                                                         prompt=f"Write an article with the title '{self.title}'",
                                                         temperature=0.3, max_tokens=1000)['choices'][0]['text']
+                except Exception as e:
+                    print(f"Unable to generate image: {e}")
+
             if not self.thumbnail:
                 openai.api_key = settings.OPENAI_API_KEY
                 response = openai.Image.create(
@@ -76,8 +80,12 @@ class Article(models.Model):
                     n=1,
                     size="1024x1024"
                 )
-                image_url = response['data'][0]['url']
-                image_content = ContentFile(requests.get(image_url).content)
-                self.thumbnail.save(self.slug + ".png", image_content)
+                try:
+                    image_url = response['data'][0]['url']
+                    image_content = ContentFile(requests.get(image_url).content)
+                    self.thumbnail.save(self.slug + ".png", image_content)
+                except Exception as e:
+                    print(f'Unable to generate image: {e}')
+                    print(response)
 
         super(Article, self).save(*args, **kwargs)
