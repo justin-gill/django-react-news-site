@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Application definition
 
@@ -165,7 +165,7 @@ CORS_ALLOW_HEADERS = [
     'content-type'
 ]
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['0.0.0.0', 'internationalnewsproject.com', 'www.internationalnewsproject.com']
 
 X_FRAME_OPTIONS = 'ALLOWALL'
 
