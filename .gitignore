@@ -6,3 +6,4 @@ media/
 *.jpg
 *service-account.json
 django_static
+init-letsencrypt.sh
