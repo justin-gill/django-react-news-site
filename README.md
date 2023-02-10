@@ -23,6 +23,6 @@ International News Project is a satirical news site where most of the article co
 ---
 
 ## Hosting
-* Currently hosted using GCP Compute Instance, Cloud SQL for PostgreSQL, and a Cloud Storage Bucket for static images. A little overkill for such a simple app, but it works!
+* Currently hosted using GCP Compute Engine, Cloud SQL for PostgreSQL, and a Cloud Storage Bucket for static images. A little overkill for such a simple app, but it works!
 #### Helpful references
 https://saasitive.com/tutorial/docker-compose-django-react-nginx-let-s-encrypt/
