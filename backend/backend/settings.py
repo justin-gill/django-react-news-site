@@ -28,7 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if env('DEVELOPMENT') == 'True':
+    DEBUG = True
+else:
+    DEBUG = False
 
 # Application definition
 
@@ -145,30 +148,31 @@ REST_FRAMEWORK = {
 
 SUMMERNOTE_THEME = 'bs4'
 
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000"
-]
-
-
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000"
-    "http://0.0.0.0",
-    "https://internationalnewsproject.com",
-]
+if env('DEVELOPMENT') == 'True':
+    CORS_ALLOWED_ORIGINS = [
+        "http://0.0.0.0",
+    ]
+    CSRF_TRUSTED_ORIGINS = [
+        "http://0.0.0.0",
+        "https://internationalnewsproject.com",
+    ]
+    ALLOWED_HOSTS = ['0.0.0.0']
+else:
+    CORS_ALLOWED_ORIGINS = [
+        "https://internationalnewsproject.com",
+    ]
+    CSRF_TRUSTED_ORIGINS = [
+        "http://0.0.0.0",
+        "https://internationalnewsproject.com",
+    ]
+    ALLOWED_HOSTS = ['internationalnewsproject.com', 'www.internationalnewsproject.com']
+    
 
 CORS_ALLOW_HEADERS = [
     'x-csrf-token',
     'x-requested-with',
     'content-type'
 ]
-
-ALLOWED_HOSTS = ['0.0.0.0', 'internationalnewsproject.com', 'www.internationalnewsproject.com']
-
-X_FRAME_OPTIONS = 'ALLOWALL'
 
 XS_SHARING_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
 

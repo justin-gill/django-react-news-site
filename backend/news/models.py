@@ -2,8 +2,11 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.conf import settings
 
+from PIL import Image
+from io import BytesIO
 import openai
 import requests
 
@@ -81,11 +84,17 @@ class Article(models.Model):
                     size="1024x1024"
                 )
                 try:
+                    # generate image from open ai and optimize file size
                     image_url = response['data'][0]['url']
-                    image_content = ContentFile(requests.get(image_url).content)
-                    self.thumbnail.save(self.slug + ".png", image_content)
+                    response = requests.get(image_url, stream=True)
+                    image_content = Image.open(response.raw)
+                    image_io = BytesIO()
+                    image_content = image_content.resize((800,800),Image.ANTIALIAS)
+                    image_content.save(image_io, format='JPEG', quality=70)
+                    image_io.seek(0)
+                    self.thumbnail = InMemoryUploadedFile(image_io, 'ImageField', self.slug + ".jpg", 'image/jpeg', len(image_io.getbuffer()), None)
                 except Exception as e:
                     print(f'Unable to generate image: {e}')
                     print(response)
-
+    
         super(Article, self).save(*args, **kwargs)
