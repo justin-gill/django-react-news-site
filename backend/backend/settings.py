@@ -150,13 +150,13 @@ SUMMERNOTE_THEME = 'bs4'
 
 if env('DEVELOPMENT') == 'True':
     CORS_ALLOWED_ORIGINS = [
-        "http://0.0.0.0",
+        "http://localhost:3000",
     ]
     CSRF_TRUSTED_ORIGINS = [
-        "http://0.0.0.0",
-        "https://internationalnewsproject.com",
+        "http://localhost:3000",
     ]
-    ALLOWED_HOSTS = ['0.0.0.0']
+    # ALLOWED_HOSTS = ['localhost']
+    ALLOWED_HOSTS = ['*']
 else:
     CORS_ALLOWED_ORIGINS = [
         "https://internationalnewsproject.com",
