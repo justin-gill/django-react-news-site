@@ -168,7 +168,10 @@ else:
         "http://0.0.0.0",
         "https://internationalnewsproject.com",
     ]
-    ALLOWED_HOSTS = ['internationalnewsproject.com', 'www.internationalnewsproject.com']
+    ALLOWED_HOSTS = [
+        'internationalnewsproject.com'
+        'www.internationalnewsproject.com',
+    ]
     
 
 CORS_ALLOW_HEADERS = [
