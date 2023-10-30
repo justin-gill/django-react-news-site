@@ -22,5 +22,3 @@ International News Project is a satirical news site where most of the article co
     * ```docker exec -it $(docker ps -aqf "name=international-news-project-backend") python backend/manage.py```
 ---
 
-## Hosting
-* Currently hosted using GCP Compute Engine, Cloud SQL for PostgreSQL, and a Cloud Storage Bucket for static images. A little overkill for such a simple app, but it works!

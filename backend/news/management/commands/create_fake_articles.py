@@ -19,3 +19,4 @@ class Command(BaseCommand):
                 thumbnail=UploadedFile(file=open("backend/static/temp.jpg", 'rb')),
                 featured=True)
         print(f"[create_fake_articles] Finished creating {num_articles} Articles")
+

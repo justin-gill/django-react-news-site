@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if env('DEVELOPMENT') == 'True':
+if env('ENVIRONMENT') == 'dev':
     DEBUG = True
 else:
     DEBUG = False
@@ -45,20 +45,24 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'django_summernote',
     'news'
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
+    'django.middleware.common.CommonMiddleware',
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+
+APPEND_SLASH=True
+
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -87,10 +91,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': env('DB_ENGINE'),
-        'NAME': env('DB_NAME_DJANGO'),
-        'USER': env('DB_USER_DJANGO'),
-        'PASSWORD': env('DB_PASSWORD_DJANGO'),
-        'HOST': env('DB_HOST_DJANGO'),
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
         'PORT': env('DB_PORT'),
     }
 }
@@ -146,17 +150,16 @@ REST_FRAMEWORK = {
     ]
 }
 
-SUMMERNOTE_THEME = 'bs4'
-
-if env('DEVELOPMENT') == 'True':
+if env('ENVIRONMENT') == 'dev':
     CORS_ALLOWED_ORIGINS = [
+        "http://127.0.0.1:3000",
         "http://localhost:3000",
     ]
     CSRF_TRUSTED_ORIGINS = [
+        "http://127.0.0.1:3000",
         "http://localhost:3000",
     ]
-    # ALLOWED_HOSTS = ['localhost']
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 else:
     CORS_ALLOWED_ORIGINS = [
         "https://internationalnewsproject.com",

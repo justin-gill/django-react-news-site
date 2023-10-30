@@ -74,7 +74,7 @@ class Article(models.Model):
                                                         prompt=f"Write an article with the title '{self.title}'",
                                                         temperature=0.3, max_tokens=1000)['choices'][0]['text']
                 except Exception as e:
-                    print(f"Unable to generate image: {e}")
+                    print(f"Unable to generate article: {e}")
 
             if not self.thumbnail:
                 openai.api_key = settings.OPENAI_API_KEY

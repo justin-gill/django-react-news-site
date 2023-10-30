@@ -1,0 +1,75 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+    env_file:
+      - .env
+    entrypoint: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    networks:
+      - inp_network
+    profiles:
+      - prod
+      - dev
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    env_file:
+      - .env
+    entrypoint: ["npm", "start"]
+    networks:
+      - inp_network
+    profiles:
+      - prod
+      - dev
+
+  db:
+    image: postgres:latest
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - inp_network
+    profiles:
+      - prod
+      - dev
+
+  nginx:
+    restart: unless-stopped
+    image: nginx:latest
+    build:
+        context: .
+        dockerfile: ./nginx/Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      # - /path_to_your_cert:/etc/ssl
+    depends_on: 
+        - backend
+    networks:
+      - inp_network
+    profiles:
+      - prod
+
+networks:
+  inp_network:
+    driver: bridge
+
+volumes:
+  pg_data:

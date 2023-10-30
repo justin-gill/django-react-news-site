@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const Home = () => {
   let { id } = useParams()
-  const [apiUrl, setApiUrl] = useState(`${process.env.REACT_APP_API_URL}/api/news/category/${id}`);
+  const [apiUrl, setApiUrl] = useState(`${process.env.REACT_APP_API_URL}/api/news/category/${id}/`);
 
   useEffect(() => {
     setApiUrl(`${process.env.REACT_APP_API_URL}/api/news/category/${id}`)

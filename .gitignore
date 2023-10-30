@@ -7,3 +7,4 @@ media/
 *service-account.json
 django_static
 init-letsencrypt.sh
+nginx/ssl/*
