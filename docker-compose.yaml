@@ -61,7 +61,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/ssl:/etc/ssl
     depends_on: 
-        - backend
+      - backend
     networks:
       - inp_network
     profiles:

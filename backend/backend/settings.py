@@ -169,8 +169,9 @@ else:
         "https://internationalnewsproject.com",
     ]
     ALLOWED_HOSTS = [
-        'internationalnewsproject.com'
+        'internationalnewsproject.com',
         'www.internationalnewsproject.com',
+        'api.internationalnewsproject.com',
     ]
     
 
