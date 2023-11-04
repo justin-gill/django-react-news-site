@@ -22,7 +22,6 @@ class Command(BaseCommand):
             Article.objects.create(
                 category=category[0],
                 generate_content=True,
-                title = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": f"Create a unique, satirical, and non-political article title with the category of '{category[0]}'. Make sure the idea is original and comedic in nature. It must be less than 140 characters in total."}], temperature=1.1, max_tokens=1000)['choices'][0]['message']['content'],
+                title = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": f"Create a unique, satirical, and non-political article title with the category of '{category[0]}'. Make sure the idea is original and comedic in nature. It must be between 60-120 characters, including spaces. Avoid swear words and controversial topics."}], temperature=1.2, max_tokens=1000)['choices'][0]['message']['content'],
                 featured=True)
-        print(f"[create_fake_articles] Finished creating {num_articles} Articles")
 

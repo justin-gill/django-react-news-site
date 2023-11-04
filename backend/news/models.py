@@ -47,17 +47,6 @@ class Article(models.Model):
     generate_content = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        # allow for only one featured Article
-        if self.featured:
-            try:
-                temp = Article.objects.filter(featured=True)
-                for i in temp:
-                    if self != i:
-                        i.featured = False
-                        i.save(update_fields=["featured"])
-            except Article.DoesNotExist:
-                pass
-
         # Ensure that each slug is unique
         original_slug = slugify(self.title)
         queryset = Article.objects.all().filter(slug__iexact=original_slug)
@@ -80,7 +69,7 @@ class Article(models.Model):
             if not self.thumbnail:
                 openai.api_key = settings.OPENAI_API_KEY
                 response = openai.Image.create(
-                    prompt=self.title,
+                    prompt=f"Create an image for an article with the title '{self.title}'. Make the image photorealistic.",
                     n=1,
                     size="1024x1024"
                 )
@@ -98,4 +87,15 @@ class Article(models.Model):
                     print(f'Unable to generate image: {e}')
                     print(response)
     
+        # allow for only one featured Article
+        if self.featured:
+            try:
+                temp = Article.objects.filter(featured=True)
+                for i in temp:
+                    if self != i:
+                        i.featured = False
+                        i.save(update_fields=["featured"])
+            except Article.DoesNotExist:
+                pass
+
         super(Article, self).save(*args, **kwargs)

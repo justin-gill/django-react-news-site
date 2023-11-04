@@ -15,9 +15,6 @@ services:
     entrypoint: ${DJANGO_ENTRYPOINT-python manage.py runserver 0.0.0.0:8000}
     networks:
       - docker-network
-    profiles:
-      - prod
-      - dev
     restart: always
 
   inp-frontend:
@@ -33,9 +30,6 @@ services:
     entrypoint: ${REACT_ENTRYPOINT-npm start}
     networks:
       - docker-network
-    profiles:
-      - prod
-      - dev
     restart: always
 
   inp-db:
@@ -46,9 +40,6 @@ services:
       - pg_data:/var/lib/postgresql/data
     networks:
       - docker-network
-    profiles:
-      - prod
-      - dev
     restart: always
 
 networks:
