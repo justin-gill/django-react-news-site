@@ -24,11 +24,11 @@ class Article(models.Model):
         BUSINESS = 'business'
         HEALTH = 'health'
         OPINION = 'opinion'
-        POLITICS = 'politics'
         SCIENCE = 'science'
         SPORTS = 'sports'
         STYLE = 'style'
         TECHNOLOGY = 'technology'
+        PROGRAMMING = 'programming'
         TRAVEL = 'travel'
 
     title = models.CharField(max_length=150, blank=True)
@@ -50,10 +50,11 @@ class Article(models.Model):
         # allow for only one featured Article
         if self.featured:
             try:
-                temp = Article.objects.get(featured=True)
-                if self != temp:
-                    temp.featured = False
-                    temp.save(update_fields=["featured"])
+                temp = Article.objects.filter(featured=True)
+                for i in temp:
+                    if self != i:
+                        i.featured = False
+                        i.save(update_fields=["featured"])
             except Article.DoesNotExist:
                 pass
 

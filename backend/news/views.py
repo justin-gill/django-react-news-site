@@ -46,3 +46,4 @@ class CategoryChoicesView(ListAPIView):
             value = {'key': k, 'value': v}             
             choices.append(value)         
         return response.Response(choices, status=status.HTTP_200_OK)
+

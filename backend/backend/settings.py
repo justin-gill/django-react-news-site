@@ -141,8 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_FILE_STORAGE = env('FILE_STORAGE_API')
 GS_BUCKET_NAME = env('GCP_BUCKET_NAME')
-STATIC_URL = '/django_static/'
-STATIC_ROOT = BASE_DIR / 'django_static'
+STATIC_URL = '/django-static/'
+STATIC_ROOT = BASE_DIR / 'django-static'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -167,6 +167,7 @@ else:
     CSRF_TRUSTED_ORIGINS = [
         "http://0.0.0.0",
         "https://internationalnewsproject.com",
+        "https://api.internationalnewsproject.com",
     ]
     ALLOWED_HOSTS = [
         'internationalnewsproject.com',
