@@ -4,6 +4,7 @@
 ---
 
 This site is no longer hosted publically. 
+![Picture of the landing page](https://github.com/justin-gill/international-news-project/assets/47087703/7626983e-69fe-429d-99c7-131925aedad4)
 
 ### About this Project
 This project is a news site where all of the article content and images are created by OpenAI's GPT-3 and DALL·E, respectively. 
