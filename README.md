@@ -1,5 +1,5 @@
 # Django/React News Site
-##### A template news site built with Django and React. Uses OpenAPI to generate content
+##### A template news site built with Django and React. Uses OpenAI to generate content
 
 ---
 
