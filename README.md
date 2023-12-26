@@ -1,12 +1,12 @@
-# International News Project
-##### A very real news site built with Django and React
+# Django/React News Site
+##### A template news site built with Django and React. Uses OpenAPI to generate content
 
 ---
 
-View the live site [here!](https://internationalnewsproject.com)
+This site is no longer hosted publically. 
 
 ### About this Project
-International News Project is a satirical news site where all of the article content and images are created by OpenAI's GPT-3 and DALL·E, respectively. 
+This project is a news site where all of the article content and images are created by OpenAI's GPT-3 and DALL·E, respectively. 
 
 
 ### Running
@@ -17,8 +17,7 @@ International News Project is a satirical news site where all of the article con
 * `docker-compose up`
 
 
-### Tools
+### Stack
 * Django, React, PostgreSQL, NGINX, Docker
-* Hosted on a VPS
 ---
 
